@@ -1,4 +1,20 @@
-#!/usr/bin/env sh
-. "$(dirname "$0")/_/husky.sh"
+#!/bin/sh
 
-npx --no-install commitlint --edit "$1"
+# Colors
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+BLUE='\033[1;34m'
+NC='\033[0m' # No Color
+
+npx --no -- commitlint --edit "$1" || {
+  printf "${RED}❌ Commit Message Error${NC}\n\n"
+  printf "${BLUE}📝 Commit Message Format:${NC}\n"
+  printf "type(scope): Subject starts with capital letter\n\n"
+  printf "${BLUE}Valid Types:${NC}\n"
+  printf "feat, fix, docs, style, refactor, perf, test, ci, chore\n\n"
+  printf "${BLUE}Examples:${NC}\n"
+  printf "${GREEN}✓${NC} feat(auth): Add JWT authentication\n"
+  printf "${GREEN}✓${NC} fix(api): Fix user registration validation\n"
+  printf "${GREEN}✓${NC} docs(readme): Update installation steps\n"
+  exit 1
+}
