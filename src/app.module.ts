@@ -8,7 +8,10 @@ import { AuthService } from './modules/auth/auth.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { LoggerModule } from 'nestjs-pino';
+import { NodeEnv } from './common/enums';
+import { appConfig, dbConfig } from './config';
 
+const isProd = process.env.NODE_ENV === NodeEnv.PRODUCTION;
 @Module({
   imports: [
     LoggerModule.forRoot({
@@ -22,7 +25,15 @@ import { LoggerModule } from 'nestjs-pino';
         },
       },
     }),
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      // In local/dev/test, load .env.* files;
+      // In prod, prefer runtime env and ignore .env files.
+      ignoreEnvFile: isProd,
+      envFilePath: isProd ? undefined : ['.env'], // fallback to .env if present
+      expandVariables: true,
+      load: [appConfig, dbConfig], // typed, namespaced configs
+    }),
     UsersModule,
     AuthModule,
     PrismaModule,
