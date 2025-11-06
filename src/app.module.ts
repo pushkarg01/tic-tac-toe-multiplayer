@@ -7,24 +7,12 @@ import { AuthController } from './modules/auth/auth.controller';
 import { AuthService } from './modules/auth/auth.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { LoggerModule } from 'nestjs-pino';
 import { NodeEnv } from './common/enums';
 import { appConfig, dbConfig } from './config';
 
-const isProd = process.env.NODE_ENV === NodeEnv.PRODUCTION;
+const isProd = process.env.NODE_ENV === String(NodeEnv.PRODUCTION);
 @Module({
   imports: [
-    LoggerModule.forRoot({
-      pinoHttp: {
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            colorize: true,
-            translateTime: 'SYS:standard',
-          },
-        },
-      },
-    }),
     ConfigModule.forRoot({
       isGlobal: true,
       // In local/dev/test, load .env.* files;
