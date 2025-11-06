@@ -189,6 +189,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4796534456423860528, guid: 0bc3737a78995214c9d0b4a4eb519b36, type: 3}
   m_PrefabInstance: {fileID: 20769730}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &31078699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 31078702}
+  - component: {fileID: 31078701}
+  - component: {fileID: 31078700}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &31078700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31078699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2aa84b5734de94083d900f1570b411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &31078701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31078699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 31078700}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &31078702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31078699}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &103592061
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &116292609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,7 +1352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &564096223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1311,9 +1388,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   result: {fileID: 1781130348}
-  winColor: {r: 0, g: 1, b: 0, a: 1}
-  loseColor: {r: 1, g: 0, b: 0, a: 1}
-  tieColor: {r: 1, g: 1, b: 1, a: 1}
+  winColor:
+    r: 0
+    g: 1
+    b: 0
+    a: 1
+  loseColor:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
+  tieColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   rematchButton: {fileID: 1517929227}
 --- !u!1 &618583048
 GameObject:
@@ -1324,7 +1413,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 618583050}
-  - component: {fileID: 618583051}
   - component: {fileID: 618583049}
   m_Layer: 0
   m_Name: GameManager
@@ -1346,6 +1434,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  <IsLocalPlayer>k__BackingField: 0
+  <IsOwner>k__BackingField: 0
+  <IsServer>k__BackingField: 0
+  <HasAuthority>k__BackingField: 0
+  <ServerIsHost>k__BackingField: 0
+  <IsClient>k__BackingField: 0
+  <IsHost>k__BackingField: 0
+  <IsOwnedByServer>k__BackingField: 0
+  <IsSpawned>k__BackingField: 0
+  m_NetworkObject: {fileID: 0}
+  <NetworkObjectId>k__BackingField: 0
+  <NetworkBehaviourId>k__BackingField: 0
+  NetworkBehaviourIdCache: 0
+  <OwnerClientId>k__BackingField: 0
+  m_VarInit: 0
+  <m_TargetIdBeingSynchronized>k__BackingField: 0
+  localPlayerType: 0
+  currentPlayerType: {m_NetworkBehaviour: {fileID: 0}, m_InternalNetworkManager: {fileID: 0}, m_IsDirty: 0, <Name>k__BackingField: , InternalWritePerm: 0, NetworkUpdaterCheck: 0, m_InternalValue: 0, m_InternalOriginalValue: 0, m_PreviousValue: 0, m_HasPreviousValue: 0, m_IsDisposed: 0}
+  playerCrossScore: {m_NetworkBehaviour: {fileID: 0}, m_InternalNetworkManager: {fileID: 0}, m_IsDirty: 0, <Name>k__BackingField: , InternalWritePerm: 0, NetworkUpdaterCheck: 0, m_InternalValue: 0, m_InternalOriginalValue: 0, m_PreviousValue: 0, m_HasPreviousValue: 0, m_IsDisposed: 0}
+  playerCircleScore: {m_NetworkBehaviour: {fileID: 0}, m_InternalNetworkManager: {fileID: 0}, m_IsDirty: 0, <Name>k__BackingField: , InternalWritePerm: 0, NetworkUpdaterCheck: 0, m_InternalValue: 0, m_InternalOriginalValue: 0, m_PreviousValue: 0, m_HasPreviousValue: 0, m_IsDisposed: 0}
 --- !u!4 &618583050
 Transform:
   m_ObjectHideFlags: 0
@@ -1361,31 +1469,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &618583051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618583048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1572347253
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,7 +1690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &929521802
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1618,7 +1701,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f36162658085aff469ba5f6a96fe6fa4, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f36162658085aff469ba5f6a96fe6fa4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -2002,7 +2085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1380038862
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2042,59 +2125,6 @@ MonoBehaviour:
   circleTextGO: {fileID: 1642036353}
   crossScore: {fileID: 1795586671}
   circleScore: {fileID: 191147491}
---- !u!1 &1380187185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1380187187}
-  - component: {fileID: 1380187186}
-  m_Layer: 0
-  m_Name: RuntimeNWStatMonitor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1380187186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1380187185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17737e0516da2445b9b0077ae2bd9b4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Visible: 1
-  m_MaxRefreshRate: 30
-  <CustomStyleSheet>k__BackingField: {fileID: 0}
-  <PanelSettingsOverride>k__BackingField: {fileID: 0}
-  <Position>k__BackingField:
-    <OverridePosition>k__BackingField: 1
-    m_PositionLeftToRight: 0
-    m_PositionTopToBottom: 0
-  <Configuration>k__BackingField: {fileID: 11400000, guid: 8f1b4e3792d8446399527749cfb591a2, type: 2}
---- !u!4 &1380187187
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1380187185}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387898474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,111 +2200,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387898474}
   m_CullTransparentMesh: 1
---- !u!1 &1404318302
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1404318305}
-  - component: {fileID: 1404318304}
-  - component: {fileID: 1404318303}
-  m_Layer: 0
-  m_Name: NetworkManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1404318303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404318302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ProtocolType: 0
-  m_UseWebSockets: 0
-  m_UseEncryption: 0
-  m_MaxPacketQueueSize: 128
-  m_MaxPayloadSize: 6144
-  m_HeartbeatTimeoutMS: 500
-  m_ConnectTimeoutMS: 1000
-  m_MaxConnectAttempts: 60
-  m_DisconnectTimeoutMS: 30000
-  ConnectionData:
-    Address: 127.0.0.1
-    Port: 7777
-    ServerListenAddress: 127.0.0.1
-  DebugSimulator:
-    PacketDelayMS: 0
-    PacketJitterMS: 0
-    PacketDropRate: 0
---- !u!114 &1404318304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404318302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593a2fe42fa9d37498c96f9a383b6521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkManagerExpanded: 0
-  NetworkConfig:
-    ProtocolVersion: 0
-    NetworkTransport: {fileID: 1404318303}
-    PlayerPrefab: {fileID: 0}
-    Prefabs:
-      NetworkPrefabsLists:
-      - {fileID: 11400000, guid: 27617a3b62d91e147b20b022ef9f5467, type: 2}
-    TickRate: 30
-    ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
-    ConnectionData: 
-    EnableTimeResync: 0
-    TimeResyncInterval: 30
-    EnsureNetworkVariableLengthSafety: 0
-    EnableSceneManagement: 1
-    ForceSamePrefabs: 1
-    RecycleNetworkIds: 1
-    NetworkIdRecycleDelay: 120
-    RpcHashSize: 0
-    LoadSceneTimeOut: 120
-    SpawnTimeout: 10
-    EnableNetworkLogs: 1
-    NetworkTopology: 0
-    UseCMBService: 0
-    AutoSpawnPlayerPrefabClientSide: 1
-    NetworkMessageMetrics: 1
-    NetworkProfilingMetrics: 1
-    OldPrefabList: []
-  RunInBackground: 1
-  LogLevel: 1
---- !u!4 &1404318305
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404318302}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1451316805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3813,7 +3738,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1924699518}
-  - component: {fileID: 1924699519}
   - component: {fileID: 1924699517}
   m_Layer: 0
   m_Name: VisualManager
@@ -3835,9 +3759,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  <IsLocalPlayer>k__BackingField: 0
+  <IsOwner>k__BackingField: 0
+  <IsServer>k__BackingField: 0
+  <HasAuthority>k__BackingField: 0
+  <ServerIsHost>k__BackingField: 0
+  <IsClient>k__BackingField: 0
+  <IsHost>k__BackingField: 0
+  <IsOwnedByServer>k__BackingField: 0
+  <IsSpawned>k__BackingField: 0
+  m_NetworkObject: {fileID: 0}
+  <NetworkObjectId>k__BackingField: 0
+  <NetworkBehaviourId>k__BackingField: 0
+  NetworkBehaviourIdCache: 0
+  <OwnerClientId>k__BackingField: 0
+  m_VarInit: 0
+  <m_TargetIdBeingSynchronized>k__BackingField: 0
   crossPrefab: {fileID: 1775466207015683273, guid: f1225382ab392d145b855f2d7e49c7f7, type: 3}
   circlePrefab: {fileID: 8925680445862177183, guid: f1ccd4a17c8acef45af05cd52c149786, type: 3}
   lineCompletePrefab: {fileID: 9069311909869610884, guid: 2677ffd4776789a4c926f172f56f99ba, type: 3}
+  visualGameObjectList: []
 --- !u!4 &1924699518
 Transform:
   m_ObjectHideFlags: 0
@@ -3853,31 +3794,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1924699519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924699516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3195157865
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &1930912727
 GameObject:
   m_ObjectHideFlags: 0
@@ -4322,7 +4238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2045499373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4500,8 +4416,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 1404318305}
-  - {fileID: 1380187187}
   - {fileID: 1098971030}
   - {fileID: 618583050}
   - {fileID: 1924699518}
@@ -4509,3 +4423,4 @@ SceneRoots:
   - {fileID: 338684370}
   - {fileID: 116292610}
   - {fileID: 929521803}
+  - {fileID: 31078702}
