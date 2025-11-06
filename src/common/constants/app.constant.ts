@@ -9,5 +9,6 @@ export const appConstant = {
     ZERO: 0,
     ONE: 1,
     NULL: null,
+    UNDEFINED: undefined,
   },
 };

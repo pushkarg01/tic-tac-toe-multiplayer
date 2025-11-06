@@ -4,13 +4,18 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { GlobalExceptionFilter } from './common/filters/http-exception.filter';
+import { appConstant } from './common/constants';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    bufferLogs: true,
+    bufferLogs: appConstant.TRUTHY_FALSY_VALUES.TRUE,
   });
 
-  // Register global interceptor (for success responses)
+  // Register global logger
+  app.useLogger(app.get(Logger));
+
+  // Register global interceptor
   app.useGlobalInterceptors(new ResponseInterceptor());
 
   // Register global exception filter (for error responses)
@@ -19,9 +24,9 @@ async function bootstrap() {
   // Validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
+      whitelist: appConstant.TRUTHY_FALSY_VALUES.TRUE,
+      forbidNonWhitelisted: appConstant.TRUTHY_FALSY_VALUES.TRUE,
+      transform: appConstant.TRUTHY_FALSY_VALUES.TRUE,
     }),
   );
 
@@ -37,6 +42,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   // Start app
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? appConstant.PORT);
 }
 void bootstrap();
