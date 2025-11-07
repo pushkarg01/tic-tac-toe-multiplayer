@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,7 +11,6 @@ import { LogLevel, NodeEnv } from './common/enums';
 import { appConfig, dbConfig } from './config';
 import { LoggerModule } from 'nestjs-pino';
 import { appConstant } from './common/constants';
-import { IncomingMessage, ServerResponse } from 'http';
 
 // Extend the ServerResponse type so we can safely access res.req
 
@@ -39,63 +36,14 @@ const isProd = process.env.NODE_ENV === String(NodeEnv.PRODUCTION);
               target: 'pino-pretty',
               options: {
                 colorize: true,
-                singleLine: true,
                 translateTime: 'SYS:standard',
-                ignore: 'pid,hostname',
+                singleLine: false,
+                messageFormat: '{msg} [{method} {url}]', // optional formatting
+                ignore: 'pid,hostname,req,res', // optional
               },
             }
           : undefined,
-
-        // Custom log messages
-        customSuccessMessage: (
-          req: IncomingMessage,
-          res: ServerResponse,
-          responseTime: number,
-        ) =>
-          `✅ ${req.method} ${req.url} responded ${res.statusCode} in ${responseTime}ms\n`,
-        customErrorMessage: (
-          req: IncomingMessage,
-          res: ServerResponse,
-          error: Error,
-        ) =>
-          `❌ ${req.method} ${req.url} failed ${res.statusCode}: ${error.message}`,
-
-        // Control log level based on response or error
-        customLogLevel: (
-          req: IncomingMessage,
-          res: ServerResponse,
-          err?: Error,
-        ) => {
-          if (res.statusCode >= 400 && res.statusCode < 500)
-            return LogLevel.WARN;
-          if (res.statusCode >= 500 || err) return LogLevel.ERROR;
-          return LogLevel.INFO;
-        },
-
-        // Optional extra properties for context
-        customProps: (req: IncomingMessage) => ({
-          userAgent: req.headers['user-agent'],
-        }),
-
-        // Redact sensitive data
-        redact: {
-          paths: ['req.headers.authorization', 'req.body.password'],
-          censor: '**REDACTED**',
-        },
-
-        // Customize serialization of req/res
-        serializers: {
-          req(req: any) {
-            return {
-              method: req.method,
-              url: req.url,
-              body: req.raw?.body ?? req.body,
-            };
-          },
-          res(res: any) {
-            return { statusCode: res.statusCode };
-          },
-        },
+        autoLogging: appConstant.TRUTHY_FALSY_VALUES.FALSE,
       },
     }),
 

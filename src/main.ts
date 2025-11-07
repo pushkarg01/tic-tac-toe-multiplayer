@@ -6,6 +6,7 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 import { GlobalExceptionFilter } from './common/filters/http-exception.filter';
 import { appConstant } from './common/constants';
 import { Logger } from 'nestjs-pino';
+import { PinoLoggerInterceptor } from './common/interceptors/pino-logger.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -13,13 +14,16 @@ async function bootstrap() {
   });
 
   // Register global logger
-  app.useLogger(app.get(Logger));
+  const logger = app.get(Logger);
 
   // Register global interceptor
-  app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalInterceptors(
+    new ResponseInterceptor(),
+    new PinoLoggerInterceptor(logger),
+  );
 
   // Register global exception filter (for error responses)
-  app.useGlobalFilters(new GlobalExceptionFilter());
+  app.useGlobalFilters(new GlobalExceptionFilter(logger));
 
   // Validation pipe
   app.useGlobalPipes(
