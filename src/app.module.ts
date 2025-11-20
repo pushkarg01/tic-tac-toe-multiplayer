@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './modules/users/users.module';
 import { AuthController } from './modules/auth/auth.controller';
@@ -57,7 +55,7 @@ const isProd = process.env.NODE_ENV === String(NodeEnv.PRODUCTION);
     TicTacToeModule,
     InMemoryGameSocketModule,
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService],
+  controllers: [AuthController],
+  providers: [AuthService],
 })
 export class AppModule {}
