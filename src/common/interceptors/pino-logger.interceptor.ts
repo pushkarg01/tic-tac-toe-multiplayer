@@ -20,7 +20,7 @@ export class PinoLoggerInterceptor implements NestInterceptor {
     const request = httpContext.getRequest();
     const { method, url, body, headers, params, query } = request;
 
-    // 🟢 Remove sensitive data from request body
+    // Remove sensitive data from request body
     const safeBody = { ...body };
     if (safeBody.password) safeBody.password = '[REDACTED]';
     if (safeBody.confirmPassword) safeBody.confirmPassword = '[REDACTED]';

@@ -11,6 +11,9 @@ import { LogLevel, NodeEnv } from './common/enums';
 import { appConfig, dbConfig } from './config';
 import { LoggerModule } from 'nestjs-pino';
 import { appConstant } from './common/constants';
+import { GameManagerModule } from './modules/game-manager/game-manager.module';
+import { TicTacToeModule } from './modules/tic-tac-toe/tic-tac-toe.module';
+import { InMemoryGameSocketModule } from './modules/game-socket/in-memory-game-socket/in-memory-game-socket.module';
 
 // Extend the ServerResponse type so we can safely access res.req
 
@@ -50,6 +53,9 @@ const isProd = process.env.NODE_ENV === String(NodeEnv.PRODUCTION);
     UsersModule,
     AuthModule,
     PrismaModule,
+    GameManagerModule,
+    TicTacToeModule,
+    InMemoryGameSocketModule,
   ],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService],
