@@ -117,7 +117,6 @@ namespace Network.API
             var res = await Client.Post<APIResponse<RegisterUserResponse>>(url, postData);
             if (res != null && res.isSuccess)
             {
-                Debug.Log("User registration successful.");
                 onResponse?.Invoke(true, res.data.userId);
             }
             else
@@ -137,7 +136,6 @@ namespace Network.API
             var res = await Client.Get<APIResponse<RegisterUserResponse>>(url);
             if (res != null && res.isSuccess)
             {
-                Debug.Log("User existence check successful.");
                 onResponse?.Invoke(true, res.data.userId);
             }
             else
