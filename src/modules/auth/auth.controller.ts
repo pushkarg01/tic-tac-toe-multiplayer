@@ -14,10 +14,23 @@ export class AuthController {
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: successMessages.USER_REGISTERED,
+    example: {
+      isSuccess: true,
+      message: 'User Registered Successfully',
+      data: {
+        playerId: 'cm3pl8k9g0000v9zl3q7e8f2x',
+        userName: 'john_doe',
+      },
+    },
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
     description: 'Invalid input data',
+    example: {
+      isSuccess: false,
+      message: 'userName must be longer than or equal to 3 characters',
+      data: null,
+    },
   })
   async register(@Body() createUserDto: CreateUserDto) {
     const user = await this.usersService.create(createUserDto);
