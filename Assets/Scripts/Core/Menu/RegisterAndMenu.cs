@@ -1,3 +1,4 @@
+using Network.API;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +14,18 @@ public class RegisterAndMenu : MonoBehaviour
 
     string _userName = "";
     private bool _isUserNameValid = false;
+    private bool _isLogin = false;
 
     [Inject] private IMessageBox _messageBox;
+    [Inject] private APIHandler _apiHandler;
 
     private void Start()
     {
+        if (_isLogin)
+        {
+            OnAlreadyLogin();
+            return;
+        }
         _registerMenu.SetActive(true);
         _mainMenu.SetActive(false);
 
@@ -35,8 +43,43 @@ public class RegisterAndMenu : MonoBehaviour
         ValidateUserName();
         if (!_isUserNameValid) return;
 
-        _registerMenu.SetActive(false);
-        _mainMenu.SetActive(true);
+        _apiHandler.RegisterUser(_userName, (Status, data) =>
+        {
+           if (Status)
+            {
+                _registerMenu.SetActive(false);
+                _mainMenu.SetActive(true);
+                UniversalConstants.UserName = _userName;
+                PlayerPrefs.SetString(UserPrefs.UserName, _userName);
+                Debug.Log("User Registered Successfully: "+ UniversalConstants.UserName);
+                _isLogin = true;
+                PlayerPrefs.SetInt(UserPrefs.IsLoggedIn, _isLogin ? 1 : 0);
+            }
+            else
+            {
+                _messageBox.UpdateMessage(data);
+            }
+        });
+    }
+
+    private void OnAlreadyLogin()
+    {
+        _apiHandler.CheckUserExistence(UniversalConstants.AuthID,(Status, data) =>
+        {
+            if (Status)
+            {
+                UniversalConstants.UserName = data;
+                Debug.Log("User Already Logged In: " + UniversalConstants.UserName);
+
+                _registerMenu.SetActive(false);
+                _mainMenu.SetActive(true);
+            }
+            else
+            {
+                _isLogin = false;
+                PlayerPrefs.SetInt(UserPrefs.IsLoggedIn, _isLogin ? 1 : 0);
+            }
+        });
     }
 
     private bool ValidateUserName()

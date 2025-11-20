@@ -1,5 +1,7 @@
 using UnityEngine;
 using Zenject;
+using Network.API;
+using System.ComponentModel;
 
 public class MenuInstaller : MonoInstaller
 {
@@ -9,5 +11,8 @@ public class MenuInstaller : MonoInstaller
      .To<MessageBoxHandler>()
      .FromComponentInHierarchy()
      .AsSingle();
+
+        Container.BindInterfacesAndSelfTo<APIHandler>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<GameEvents>().FromComponentInHierarchy().AsSingle();
     }
 }

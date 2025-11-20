@@ -7,19 +7,22 @@ namespace Network.API
     public class APIResponse<T>
     {
         public string message { get; set; }
-        public bool success { get; set; }
+        public bool isSuccess { get; set; }
         public T data { get; set; }
         public bool display { get; set; }
     }
     #endregion
-    #region LoginResponse Data
-    public class PlayerDataResponse
+
+    public class RegisterUserResponse
     {
-        public string playerId { get; set; }
-        public string username { get; set; }
-        public int avatar { get; set; }
-        [JsonProperty("authToken")] public string backendAuthToken { get; set; }
+        [JsonProperty("id")]public string userId { get; set; }
+
+        [JsonProperty("username")]public string userName { get; set; }
     }
-    #endregion
+
+    public class CreateRoomResponse
+    {
+        [JsonProperty("roomId")] public string roomId { get; set; }
+    }
 }
 

@@ -31,14 +31,14 @@ namespace Network.API
             _ = Init();
         }
 
-        void Awake()
-        {
-            string token = PlayerPrefs.GetString(UserPrefs.backendJWTToken, null);
-            if (!string.IsNullOrEmpty(token))
-            {
-                OnLoggedIn(token);
-            }
-        }
+        //void Awake()
+        //{
+        //    string token = PlayerPrefs.GetString(UserPrefs.backendJWTToken, null);
+        //    if (!string.IsNullOrEmpty(token))
+        //    {
+        //        OnLoggedIn(token);
+        //    }
+        //}
 
         private async Task Init()
         {
@@ -87,86 +87,91 @@ namespace Network.API
 
         public string GetCurrentToken() => _options?.Token;
 
-        public void HandleTokenExpired()
-        {
-            OnLoggedOut();
-            PlayerPrefs.DeleteKey(UserPrefs.backendJWTToken);
-            PlayerPrefs.SetInt(UserPrefs.IsProfileSet, 0);
-            PlayerPrefs.Save();
+        //public void HandleTokenExpired()
+        //{
+        //    OnLoggedOut();
+        //    PlayerPrefs.DeleteKey(UserPrefs.backendJWTToken);
+        //    PlayerPrefs.SetInt(UserPrefs.IsProfileSet, 0);
+        //    PlayerPrefs.Save();
 
-         //   UnityEngine.SceneManagement.SceneManager.LoadScene("Splash");
-        }
+        // //   UnityEngine.SceneManagement.SceneManager.LoadScene("Splash");
+        //}
         #endregion
 
-        //#region Login and Profile Setup
-        //public async void Register(string playerId, string unityToken, string newUsername, int newAvatar, Action<bool, PlayerDataResponse> onResponse)
-        //{
-        //    if (!IsInitialized)
-        //        await Init();
 
-        //    _postDict.Clear();
-        //    _postDict.Add("playerId", playerId);
-        //    _postDict.Add("unityAccessToken", unityToken);
-        //    _postDict.Add("username", newUsername);
-        //    _postDict.Add("avatar", newAvatar);
-        //    string postData = MySerializer.Serialize(_postDict);
-        //    Debug.Log($"Login Post Data: {postData}");
+        public async void RegisterUser(string userName, Action<bool, string> onResponse)
+        {
+            if (!IsInitialized)
+                await Init();
 
-        //    string url = UniversalConstants.BaseUrl + UniversalConstants.LoginUrl;
+            _postDict.Clear();
+            _postDict.Add("userName", userName);
 
-        //    var res = await Client.Post<APIResponse<PlayerDataResponse>>(url, postData);
+            string postData = MySerializer.Serialize(_postDict);
 
-        //    if (res != null && res.success)
-        //    {
-        //        string backendToken = res.data.backendAuthToken;
-        //        UniversalConstants.backendJWTToken = backendToken;
-        //        PlayerPrefs.SetString(UserPrefs.backendJWTToken, UniversalConstants.backendJWTToken);
-        //        PlayerPrefs.Save();
-        //        OnLoggedIn(backendToken);
-        //        Debug.Log("Login successful. Backend token stored." + UniversalConstants.backendJWTToken);
-        //        onResponse?.Invoke(true, res.data);
-        //    }
-        //    else
-        //    {
-        //        Debug.LogError("Login failed: " + (res?.message ?? "No response"));
-        //        onResponse?.Invoke(false, null);
-        //    }
-        //}
+            Debug.Log($"Register User Post Data: {postData}");
 
-        //public async void ShowProfile(Action<bool, PlayerDataResponse> onResponse)
-        //{
-        //    if (!IsInitialized)
-        //        await Init();
+            string url = UniversalConstants.BaseUrl + UniversalConstants.RegisterUrl;
+            // string url = ""; 
 
-        //    if (ClientAuthenticated == null)
-        //    {
-        //        Debug.LogWarning("Authenticated client not initialized. Please login first.");
-        //        onResponse?.Invoke(false, null);
-        //        return;
-        //    }
+            var res = await Client.Post<APIResponse<RegisterUserResponse>>(url, postData);
+            if (res != null && res.isSuccess)
+            {
+                Debug.Log("User registration successful.");
+                onResponse?.Invoke(true, res.data.userId);
+            }
+            else
+            {
+                Debug.LogError("User registration failed: " + (res?.message ?? "No response"));
+                onResponse?.Invoke(false, null);
+            }
+        }
 
-        //    string url = UniversalConstants.BaseUrl + UniversalConstants.AuthMeUrl;
-        //    Debug.Log($"Checking user existence: {url}");
+        public async void CheckUserExistence(string playerID, Action<bool, string> onResponse)
+        {
+            if (!IsInitialized)
+                await Init();
 
-        //    var res = await ClientAuthenticated.Get<APIResponse<PlayerDataResponse>>(url);
+            string url = UniversalConstants.BaseUrl + string.Format(UniversalConstants.CheckUserExistenceUrl, playerID);
+            Debug.Log($"Checking user existence: {url}");
+            var res = await Client.Get<APIResponse<RegisterUserResponse>>(url);
+            if (res != null && res.isSuccess)
+            {
+                Debug.Log("User existence check successful.");
+                onResponse?.Invoke(true, res.data.userId);
+            }
+            else
+            {
+                Debug.LogError("User existence check failed: " + (res?.message ?? "No response"));
+                onResponse?.Invoke(false, null);
+            }
+        }
 
-        //    if (res != null && res.success)
-        //    {
-        //        Debug.Log("Login successful. Backend token stored." + UniversalConstants.backendJWTToken);
-        //        onResponse?.Invoke(true, res.data);
-        //    }
-        //    else
-        //    {
-        //        if (res?.message != null && res.message.ToLower().Contains("token"))
-        //        {
-        //            HandleTokenExpired();
-        //            return;
-        //        }
-        //        Debug.LogWarning("User not found or error: " + (res?.message ?? "Unknown"));
-        //        onResponse?.Invoke(false, null);
-        //    }
-        //}
-        //#endregion
+        public async void CreateRoom(string playerID,string character,Action<bool, CreateRoomResponse> onResponse)
+        {
+            if (!IsInitialized)
+                await Init();
+
+            _postDict.Clear();
+            _postDict.Add("playerID", playerID);
+            _postDict.Add("character", character);
+            string postData = MySerializer.Serialize(_postDict);
+            Debug.Log($"Create Room Post Data: {postData}");
+            string url = UniversalConstants.BaseUrl + UniversalConstants.CreateRoomUrl;
+            // string url = ""; 
+            var res = await ClientAuthenticated.Post<APIResponse<CreateRoomResponse>>(url, postData);
+            if (res != null && res.isSuccess)
+            {
+                Debug.Log("Room creation successful.");
+                onResponse?.Invoke(true, res.data);
+            }
+            else
+            {
+                Debug.LogError("Room creation failed: " + (res?.message ?? "No response"));
+                onResponse?.Invoke(false, null);
+            }
+        }
+
 
         //#region Create and Join Room
 
