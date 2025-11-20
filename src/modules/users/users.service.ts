@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateUserDto, UpdateUserDto } from './dto';
 import { User } from './interfaces';
+import { errorMessages } from './constants/errorMessages.constant';
 
 @Injectable()
 export class UsersService {
@@ -17,44 +18,44 @@ export class UsersService {
     return this.prisma.user.findMany();
   }
 
-  async findOne(id: string): Promise<User> {
+  async findOne(playerId: string): Promise<User> {
     const user = await this.prisma.user.findUnique({
-      where: { id },
+      where: { playerId },
     });
 
     if (!user) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+      throw new NotFoundException(errorMessages.USER_NOT_FOUND);
     }
 
     return user;
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+  async update(playerId: string, updateUserDto: UpdateUserDto): Promise<User> {
     const exists = await this.prisma.user.findUnique({
-      where: { id },
+      where: { playerId },
     });
 
     if (!exists) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+      throw new NotFoundException(errorMessages.USER_NOT_FOUND);
     }
 
     return this.prisma.user.update({
-      where: { id },
+      where: { playerId },
       data: updateUserDto,
     });
   }
 
-  async remove(id: string): Promise<User> {
+  async remove(playerId: string): Promise<User> {
     const exists = await this.prisma.user.findUnique({
-      where: { id },
+      where: { playerId },
     });
 
     if (!exists) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+      throw new NotFoundException(errorMessages.USER_NOT_FOUND);
     }
 
     return this.prisma.user.delete({
-      where: { id },
+      where: { playerId },
     });
   }
 }
