@@ -19,7 +19,6 @@ export class AuthController {
       message: 'User Registered Successfully',
       data: {
         playerId: 'cm3pl8k9g0000v9zl3q7e8f2x',
-        userName: 'john_doe',
       },
     },
   })
@@ -36,7 +35,7 @@ export class AuthController {
     const user = await this.usersService.create(createUserDto);
     return {
       message: successMessages.USER_REGISTERED,
-      data: user,
+      data: { playerId: user.playerId },
     };
   }
 }

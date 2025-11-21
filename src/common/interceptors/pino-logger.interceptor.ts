@@ -59,7 +59,7 @@ export class PinoLoggerInterceptor implements NestInterceptor {
             : responseBody;
 
         this.logger.log({
-          message: '⏪ Outgoing Response',
+          message: '✅️ Outgoing Response',
           method,
           url,
           statusCode,
