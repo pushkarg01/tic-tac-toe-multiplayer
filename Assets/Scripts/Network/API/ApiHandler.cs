@@ -99,7 +99,7 @@ namespace Network.API
         #endregion
 
 
-        public async void RegisterUser(string userName, Action<bool, string> onResponse)
+        public async void RegisterUser(string userName, Action<bool, RegisterUserResponse> onResponse)
         {
             if (!IsInitialized)
                 await Init();
@@ -117,7 +117,11 @@ namespace Network.API
             var res = await Client.Post<APIResponse<RegisterUserResponse>>(url, postData);
             if (res != null && res.isSuccess)
             {
-                onResponse?.Invoke(true, res.data.userId);
+                string playerID = res.data.userId;  
+                UniversalConstants.AuthID = playerID;
+                PlayerPrefs.SetString(UserPrefs.AuthToken, playerID);
+                PlayerPrefs.Save(); 
+                onResponse?.Invoke(true, res.data);
             }
             else
             {
@@ -126,7 +130,7 @@ namespace Network.API
             }
         }
 
-        public async void CheckUserExistence(string playerID, Action<bool, string> onResponse)
+        public async void CheckUserExistence(string playerID, Action<bool, RegisterUserResponse> onResponse)
         {
             if (!IsInitialized)
                 await Init();
@@ -136,7 +140,7 @@ namespace Network.API
             var res = await Client.Get<APIResponse<RegisterUserResponse>>(url);
             if (res != null && res.isSuccess)
             {
-                onResponse?.Invoke(true, res.data.userId);
+                onResponse?.Invoke(true, res.data);
             }
             else
             {

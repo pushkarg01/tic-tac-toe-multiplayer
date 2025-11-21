@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class UniversalConstants : MonoBehaviour
 {
@@ -20,8 +21,12 @@ public class UniversalConstants : MonoBehaviour
     public static string AuthID;
     public static bool IsLogedIn;
     public static string UserName;
-    public static string RoomID;
     public static bool IsLoggedIn;
+
+    //Game Info
+
+    public static string PlayerSymbol;
+    public static string RoomCode;
 
     // Game Urls
 
@@ -29,7 +34,7 @@ public class UniversalConstants : MonoBehaviour
 
     public static string RegisterUrl = "/auth/register";
 
-    public static string CheckUserExistenceUrl = "/users/{0}/me";
+    public static string CheckUserExistenceUrl = "/users/me/{0}";
 
     public static string CreateRoomUrl = "/room/create";
 

@@ -9,15 +9,14 @@ namespace Network.API
         public string message { get; set; }
         public bool isSuccess { get; set; }
         public T data { get; set; }
-        public bool display { get; set; }
     }
     #endregion
 
     public class RegisterUserResponse
     {
-        [JsonProperty("id")]public string userId { get; set; }
+        [JsonProperty("playerId")]public string userId { get; set; }
 
-        [JsonProperty("username")]public string userName { get; set; }
+        [JsonProperty("userName")]public string userName { get; set; }
     }
 
     public class CreateRoomResponse
