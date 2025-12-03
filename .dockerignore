@@ -1,0 +1,28 @@
+# Node / build artifacts
+node_modules
+dist
+npm-debug.log
+package-lock.json # optional to ignore if you generate per-environment; usually you keep it
+
+# Environment / secrets
+.env
+.env.*
+.env.local
+.env.production
+.env.development
+
+# Git / editor / OS junk
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
+
+# Docker / CI / coverage
+Dockerfile*
+docker-compose*.yml
+coverage
+coverage-final.json
+
+# Other
+*.log
