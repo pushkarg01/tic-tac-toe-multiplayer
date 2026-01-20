@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
 
 namespace Network.API
@@ -18,7 +18,7 @@ namespace Network.API
 
         [JsonProperty("userName")]public string userName { get; set; }
     }
-
+    
     public class CreateRoomResponse
     {
         [JsonProperty("roomId")] public string roomId { get; set; }
